@@ -26,6 +26,20 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::get('/dashboard', function () {
         return view('admin.dashboard');
     })->name('dashboard');
+    
+    // member create
+    Route::get('/members/create', [App\Http\Controllers\Admin\MemberController::class, 'create'])->name('members.create');
+    Route::post('/members', [App\Http\Controllers\Admin\MemberController::class, 'store'])->name('members.store');
+    Route::get('/members', function () { return redirect()->route('admin.members.create'); });
+
+    // members view
+    Route::get('/members', [App\Http\Controllers\Admin\MemberController::class, 'index'])->name('members.index');
+    Route::get('/members/{user}', [App\Http\Controllers\Admin\MemberController::class, 'show'])->name('members.show');
+    Route::delete('/members/{user}', [App\Http\Controllers\Admin\MemberController::class, 'destroy'])->name('members.destroy');
+
 });
+
+
+
 
 require __DIR__.'/auth.php';

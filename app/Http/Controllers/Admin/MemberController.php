@@ -5,6 +5,9 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;  
+use App\Mail\MemberWelcomeMail;
 use Spatie\Permission\Models\Role;
 
 class MemberController extends Controller
@@ -18,23 +21,56 @@ class MemberController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'email' => 'required|email|unique:users,email'
+            'email' => 'required|email|unique:users,email|max:255'  
         ]);
 
-        $user = User::create([
+        $tempPassword = Str::random(12);
+        $member = User::create([ 
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make(Str::random(12))  // velak caur e pastu nosutit
+            'password' => Hash::make($tempPassword)
         ]);
         
-        $user->assignRole('member');
+        $member->assignRole('member');
         
-        // pievieno admin pirmo grupu
         $adminGroup = auth()->user()->adminGroups()->first();
         if ($adminGroup) {
-            $adminGroup->members()->attach($user->id);
+            $adminGroup->members()->attach($member->id);
         }
 
-        return redirect()->route('admin.dashboard')->with('success', 'Member created!');
+        // sūtīt e pastu
+        try {
+            Mail::to($member->email)->send(new MemberWelcomeMail($member, $tempPassword));
+        } catch (\Exception $e) {
+            \Log::error('Mail failed: '.$e->getMessage());
+        }
+
+
+        return redirect()->route('admin.dashboard')->with('success', 'Member created and email sent!');
     }
+
+    public function index()
+    {
+        $adminGroup = auth()->user()->adminGroups()->first();
+        $members = $adminGroup ? $adminGroup->members : collect();
+
+        return view('admin.members.index', compact('members'));
+    }
+
+    public function show(User $user)
+    {
+        return view('admin.members.show', compact('user'));
+    }
+
+    public function destroy(User $user)
+    {
+        if ($user->id === auth()->id()) {
+            return back()->with('error', 'You cannot delete yourself.');
+        }
+
+        $user->delete();
+        return redirect()->route('admin.members.index')
+            ->with('success', 'Member deleted successfully.');
+    }
+
 }

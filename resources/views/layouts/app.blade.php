@@ -16,21 +16,37 @@
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-            @include('layouts.navigation')
+            <div class="grid grid-cols-[16rem_1fr] grid-rows-[auto_1fr] min-h-screen">
 
-            <!-- Page Heading -->
-            @isset($header)
-                <header class="bg-white dark:bg-gray-800 shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                <!-- Top Left (LOGO AREA) -->
+                <div class="row-start-1 col-start-1 bg-white dark:bg-gray-800 border-b border-r border-gray-100 dark:border-gray-700 flex items-center px-6">
+                    <a href="{{ route('dashboard') }}">
+                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
+                    </a>
+                </div>
+
+                <!-- Top Right (HEADER) -->
+               <header class="row-start-1 col-start-2 dark:bg-gray-800 bg-white shadow rounded-bl-xl px-8 py-6">
+                    @isset($header)
                         {{ $header }}
-                    </div>
+                    @endisset
                 </header>
-            @endisset
 
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
+                <!-- Sidebar (LEFT) -->
+                <aside class="row-start-2 col-start-1 dark:bg-gray-800 bg-white border-r rounded-r-xl">
+                    @include('layouts.navigation')
+                </aside>
+
+                <!-- Page Content (RIGHT) -->
+                <main class="row-start-2 col-start-2 p-6">
+                    <div class="rounded-xl shadow p-6">
+                        {{ $slot }}
+                    </div>
+                </main>
+
+            </div>
         </div>
     </body>
+
+
 </html>
