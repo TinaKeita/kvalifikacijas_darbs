@@ -56,4 +56,10 @@ class User extends Authenticatable
         return $this->belongsToMany(Group::class, 'group_user');
     }
 
+    public function assignedCostumeItems()
+    {
+        return $this->hasMany(CostumeItem::class, 'assigned_to');
+    }
+
+
 }
