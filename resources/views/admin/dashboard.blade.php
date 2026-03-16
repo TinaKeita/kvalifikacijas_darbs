@@ -13,14 +13,31 @@
         </h2>
     </x-slot>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-6">
-        {{-- Costumes Management --}}
-        <a href="{{ route('admin.costumes.index') }}" class="block bg-purple-500 hover:bg-purple-600 text-white font-bold py-6 px-4 rounded-lg text-center shadow">
-            Manage Costumes
-        </a>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-6">
 
-        <a href="{{ route('admin.costumes.create') }}" class="block bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-6 px-4 rounded-lg text-center shadow">
-            Add New Costume
-        </a>
+        {{-- LEFT SIDE --}}
+        <div class="flex flex-col gap-6">
+            <a href="{{ route('admin.costumes.index') }}"
+               class="block bg-brand-secondary hover:bg-brand-primary text-white font-bold py-6 px-4 rounded-lg text-center shadow">
+                Manage Costumes
+            </a>
+
+            <a href="{{ route('admin.costumes.create') }}"
+               class="block bg-brand-secondary hover:bg-brand-primary text-white font-bold py-6 px-4 rounded-lg text-center shadow">
+                Add New Costume
+            </a>
+        </div>
+
+        {{-- RIGHT SIDE --}}
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow min-h-[200px]">
+            <h3 class="text-lg font-semibold mb-4 text-gray-800 dark:text-gray-200">
+                Statistics
+            </h3>
+
+            <div class="text-gray-500 dark:text-gray-400 text-center py-10">
+                To be continued...
+            </div>
+        </div>
+
     </div>
 </x-app-layout>

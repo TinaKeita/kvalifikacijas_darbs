@@ -1,9 +1,21 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProfileController;  
+use App\Http\Controllers\ProfileController; 
+use SimpleSoftwareIO\QrCode\Facades\QrCode; 
 
 Route::get('/', function () { return view('welcome');});
+
+// qr code routes
+Route::get('/qr/{code}/download', function ($code) {
+    $qr = QrCode::format('png')
+        ->size(300)
+        ->generate(url('/scan/'.$code));
+
+    return response($qr)
+        ->header('Content-Type', 'image/png')
+        ->header('Content-Disposition', 'attachment; filename="qr-'.$code.'.png"');
+})->name('qr.download');
 
 // Scan routes
 Route::get('/scan/{code}', [App\Http\Controllers\ScanController::class, 'show']);

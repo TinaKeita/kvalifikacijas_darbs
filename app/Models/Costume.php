@@ -9,6 +9,7 @@ class Costume extends Model
     protected $fillable = [
         'name',
         'image',
+        'quantity',
         'group_id'
     ];
 

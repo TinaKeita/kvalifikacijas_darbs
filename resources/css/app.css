@@ -3,7 +3,65 @@
     color-scheme: light;
   }
 }
+.toggle-switch {
+  position: relative;
+  width: 50px;
+  height: 25px;
+  --light: #d8dbe0;
+  --dark: #28292c;
+}
+
+.switch-label {
+  position: absolute;
+  width: 100%;
+  height: 25px;
+  background-color: var(--dark);
+  border-radius: 12.5px;
+  cursor: pointer;
+  border: 2px solid var(--dark);
+}
+
+.checkbox {
+  position: absolute;
+  display: none;
+}
+
+.slider {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 12.5px;
+  transition: 0.3s;
+}
+
+.checkbox:checked ~ .slider {
+  background-color: var(--light);
+}
+
+.slider::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  box-shadow: inset 6px -2px 0px 0px var(--light);
+  background-color: var(--dark);
+  transition: 0.3s;
+}
+
+.checkbox:checked ~ .slider::before {
+  transform: translateX(25px);
+  background-color: var(--dark);
+  box-shadow: none;
+}
+
 
 @tailwind base;
+@layer base {
+    h1, h2, h3 { @apply font-logo tracking-wide; }
+}
+
 @tailwind components;
 @tailwind utilities;

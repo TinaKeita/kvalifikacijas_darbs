@@ -38,8 +38,16 @@ class CostumeController extends Controller
             'name' => $request->name,
             'quantity' => $request->quantity,
             'image' => $imagePath,
-            'admin_group_id' => auth()->user()->adminGroups()->first()->id,
+            'group_id' => auth()->user()->adminGroups()->first()->id,
         ]);
+
+        // create CostumeItems
+        for ($i = 0; $i < $request->quantity; $i++) {
+            $costume->items()->create([
+                'qr_code' => Str::uuid(), // unique code for each item
+                'assigned_to' => null,    // initially not assigned
+            ]);
+        }
 
         return redirect()->route('admin.costumes.index')->with('success', 'Costume created successfully!');
     }
@@ -55,6 +63,6 @@ class CostumeController extends Controller
     {
         $costume->delete();
 
-        return back()->with('success', 'Costume deleted.');
+        return redirect()->route('admin.costumes.index')->with('success', 'Costume deleted.');
     }
 }

@@ -19,7 +19,7 @@
                         <td class="p-2 border">{{ $member->email }}</td>
                         <td class="p-2 border space-x-2">
                             <a href="{{ route('admin.members.show', $member) }}"
-                               class="bg-blue-500 text-white px-3 py-1 rounded">
+                               class="bg-brand-secondary text-white px-3 py-1 rounded">
                                 View
                             </a>
 
@@ -30,7 +30,7 @@
                                 @method('DELETE')
                                 <button type="submit"
                                         onclick="return confirm('Delete this member?')"
-                                        class="bg-red-500 text-white px-3 py-1 rounded">
+                                        class="bg-brand-secondary text-white px-3 py-1 rounded">
                                     Delete
                                 </button>
                             </form>
