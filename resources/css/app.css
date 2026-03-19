@@ -60,7 +60,7 @@
 
 @tailwind base;
 @layer base {
-    h1, h2, h3 { @apply font-logo tracking-wide; }
+  h1, h2, h3 { @apply font-sans font-semibold tracking-normal; }
 }
 
 @tailwind components;

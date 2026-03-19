@@ -4,18 +4,20 @@ namespace App\Http\Controllers\Member;
 
 use App\Http\Controllers\Controller;
 use App\Models\CostumeItem;
+use App\Models\Group;
 
 class CostumeController extends Controller
 {
     // Show all items available for this member
-    public function index()
+    public function index(Group $group)
     {
         $items = auth()->user()
             ->assignedCostumeItems() // make sure this relationship exists in User model
             ->with('costume')
+            ->whereHas('costume', fn($query) => $query->where('group_id', $group->id))
             ->get();
 
-        return view('member.index', compact('items'));
+        return view('member.index', compact('items', 'group'));
     }
 
     // Show only items assigned to this member

@@ -1,43 +1,45 @@
 <x-app-layout>
-    {{-- Success message --}}
+    <x-slot name="header">
+        @php $mainGroup = auth()->user()->adminGroups()->first(); @endphp
+        <div class="flex flex-col gap-1">
+            <h2 class="text-2xl font-semibold text-brand-accent dark:text-brand-light leading-tight">
+                {{ $mainGroup?->name ?? 'Admin' }} Dashboard
+            </h2>
+            <p class="text-sm text-gray-600 dark:text-gray-300">
+                Manage costumes and members from one place.
+            </p>
+        </div>
+    </x-slot>
+
     @if(session('success'))
-        <div class="bg-green-100 border border-green-400 text-green-700 px-6 py-4 rounded-xl mb-6 shadow-lg animate-pulse">
-            ✅ {{ session('success') }}
+        <div class="mb-6 rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-medium text-emerald-700 dark:border-emerald-700/40 dark:bg-emerald-900/20 dark:text-emerald-300">
+            {{ session('success') }}
         </div>
     @endif
 
-    <x-slot name="header">
-        @php $mainGroup = auth()->user()->adminGroups()->first(); @endphp
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ $mainGroup->name }} Dashboard
-        </h2>
-    </x-slot>
+    <section class="grid grid-cols-1 gap-6 lg:grid-cols-2">
 
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-6">
-
-        {{-- LEFT SIDE --}}
-        <div class="flex flex-col gap-6">
+        <div class="flex flex-col gap-4">
             <a href="{{ route('admin.costumes.index') }}"
-               class="block bg-brand-secondary hover:bg-brand-primary text-white font-bold py-6 px-4 rounded-lg text-center shadow">
+                class="rounded-xl border border-brand-primary/20 bg-brand-primary px-5 py-4 text-center text-sm font-semibold text-white shadow-sm transition hover:bg-brand-accent focus:outline-none focus:ring-2 focus:ring-brand-secondary/50">
                 Manage Costumes
             </a>
 
             <a href="{{ route('admin.costumes.create') }}"
-               class="block bg-brand-secondary hover:bg-brand-primary text-white font-bold py-6 px-4 rounded-lg text-center shadow">
+                class="rounded-xl border border-brand-primary/20 bg-brand-light/55 px-5 py-4 text-center text-sm font-semibold text-brand-accent shadow-sm transition hover:bg-brand-light/75 dark:border-brand-secondary/35 dark:bg-darkbrand-light/45 dark:text-brand-light dark:hover:bg-darkbrand-light/60">
                 Add New Costume
             </a>
         </div>
 
-        {{-- RIGHT SIDE --}}
-        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow min-h-[200px]">
-            <h3 class="text-lg font-semibold mb-4 text-gray-800 dark:text-gray-200">
+        <div class="min-h-[190px] rounded-xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
+            <h3 class="mb-4 text-lg font-semibold text-gray-800 dark:text-gray-200">
                 Statistics
             </h3>
 
-            <div class="text-gray-500 dark:text-gray-400 text-center py-10">
+            <div class="rounded-lg border border-dashed border-gray-300 px-4 py-10 text-center text-sm text-gray-500 dark:border-gray-600 dark:text-gray-400">
                 To be continued...
             </div>
         </div>
 
-    </div>
+    </section>
 </x-app-layout>

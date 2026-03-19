@@ -15,17 +15,17 @@ export default {
         extend: {
             colors: {
                 brand: {
-                    primary: '#BE5B50',
-                    secondary: '#8A2D3B',
-                    accent: '#641B2E',
-                    light: '#FBDB93',
+                    primary: '#748873',
+                    secondary: '#D1A980',
+                    accent: '#4f6150',
+                    light: '#E5E0D8',
                 },
 
                 darkbrand: {
-                    primary: '#E07A6F',
-                    secondary: '#A9444F',
-                    accent: '#7A2B3E',
-                    light: '#3a2a1e',
+                    primary: '#3d4d3c',
+                    secondary: '#a07850',
+                    accent: '#2d3d2d',
+                    light: '#2a2724',
                 }
             },
 
