@@ -7,22 +7,22 @@
 	<title>{{ config('app.name', 'Rotadata') }}</title>
 	@vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="min-h-screen bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-100">
-	<main class="mx-auto flex min-h-screen max-w-5xl items-center px-6 py-14">
-		<section class="w-full rounded-2xl border border-gray-200 bg-white p-8 shadow-sm dark:border-gray-700 dark:bg-gray-800 sm:p-10">
-			<p class="text-sm font-medium uppercase tracking-widest text-brand-primary dark:text-brand-secondary">Rotadata</p>
-			<h1 class="mt-3 text-3xl font-semibold text-brand-accent dark:text-brand-light sm:text-4xl">Costume Inventory, Simplified</h1>
-			<p class="mt-4 max-w-2xl text-base text-gray-600 dark:text-gray-300">
+<body class="landing-bg">
+	<main class="landing-main">
+		<section class="landing-card">
+			<p class="text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] text-brand-primary dark:text-brand-secondary">Rotadata</p>
+			<h1 class="mt-3 text-2xl font-semibold leading-tight text-brand-accent dark:text-brand-light sm:text-4xl">Costume Inventory, Simplified</h1>
+			<p class="mt-4 max-w-2xl text-sm sm:text-base text-gray-600 dark:text-gray-300">
 				Manage groups, assign costume items, and track inventory with a clean workflow for teachers and students.
 			</p>
 
-			<div class="mt-8 flex flex-wrap items-center gap-3">
+			<div class="mt-7 flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-3">
 				@auth
-					<a href="{{ route('dashboard') }}" class="inline-flex items-center rounded-lg border border-brand-primary/20 bg-brand-primary px-4 py-2 text-sm font-semibold text-white transition hover:bg-brand-accent">
+					<a href="{{ route('dashboard') }}" class="inline-flex justify-center items-center rounded-lg border border-brand-primary/20 bg-brand-primary px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-brand-accent">
 						Go to Dashboard
 					</a>
 				@else
-					<a href="{{ route('login') }}" class="inline-flex items-center rounded-lg border border-brand-primary/20 bg-brand-primary px-4 py-2 text-sm font-semibold text-white transition hover:bg-brand-accent">
+					<a href="{{ route('login') }}" class="inline-flex justify-center items-center rounded-lg border border-brand-primary/20 bg-brand-primary px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-brand-accent">
 						Log In
 					</a>
 				@endauth

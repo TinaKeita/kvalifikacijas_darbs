@@ -12,6 +12,7 @@ use Spatie\Permission\Models\Role;
 
 class MemberController extends Controller
 {
+    // forma jauna lietotāja pievienošanai
     public function create()
     {
         return view('admin.members.create');
@@ -38,7 +39,7 @@ class MemberController extends Controller
             $adminGroup->members()->attach($member->id);
         }
 
-        // sūtīt e pastu
+        // sūtīt e pastu ziņu ar paroli
         try {
             Mail::to($member->email)->send(new MemberWelcomeMail($member, $tempPassword));
         } catch (\Exception $e) {
@@ -49,6 +50,7 @@ class MemberController extends Controller
         return redirect()->route('admin.dashboard')->with('success', 'Member created and email sent!');
     }
 
+    // parāda visus lietotājus
     public function index()
     {
         $adminGroup = auth()->user()->adminGroups()->first();

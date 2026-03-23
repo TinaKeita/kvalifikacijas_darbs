@@ -8,7 +8,7 @@ use App\Models\Group;
 
 class CostumeController extends Controller
 {
-    // Show all items available for this member
+    // parāda visus tērpa vienības, kas piešķirtas konkrētam lietotājam 
     public function index(Group $group)
     {
         $items = auth()->user()
@@ -20,7 +20,7 @@ class CostumeController extends Controller
         return view('member.index', compact('items', 'group'));
     }
 
-    // Show only items assigned to this member
+    // parāda visus tērpa vienības, kas piešķirtas konkrētam lietotājam
     public function assigned()
     {
         $items = CostumeItem::where('assigned_to', auth()->id())
@@ -30,7 +30,7 @@ class CostumeController extends Controller
         return view('member.assigned', compact('items'));
     }
 
-    // Unassign an item
+    // noņem tērpa vienību no lietotāja
     public function unassign(CostumeItem $item)
     {
         if ($item->assigned_to !== auth()->id()) {

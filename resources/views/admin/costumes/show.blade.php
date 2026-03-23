@@ -1,4 +1,5 @@
 <x-app-layout>
+    {{-- tērpu vienību lapa --}}
     <x-slot name="header">
         <div class="flex flex-col gap-1">
             <h2 class="text-2xl font-semibold text-brand-accent dark:text-brand-light leading-tight">{{ $costume->name }} Inventory</h2>
@@ -10,7 +11,7 @@
         <form action="{{ route('admin.costumes.destroy', $costume->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this costume?');">
             @csrf
             @method('DELETE')
-            <button type="submit" class="inline-flex items-center rounded-lg border border-red-300 bg-red-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-red-500 dark:border-red-400/40 dark:bg-red-700 dark:hover:bg-red-600">
+            <button type="submit" class="inline-flex items-center rounded-lg border border-brand-primary/20 bg-brand-primary px-4 py-2 text-sm font-semibold text-white transition hover:bg-brand-accent focus:outline-none focus:ring-2 focus:ring-brand-secondary/50 dark:border-darkbrand-accent dark:bg-darkbrand-secondary dark:hover:bg-darkbrand-accent">
                 Delete Costume
             </button>
         </form>

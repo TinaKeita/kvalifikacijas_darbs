@@ -1,4 +1,5 @@
 <x-app-layout>
+    {{-- admin sākumlapa --}}
     <x-slot name="header">
         @php $mainGroup = auth()->user()->adminGroups()->first(); @endphp
         <div class="flex flex-col gap-1">

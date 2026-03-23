@@ -1,4 +1,5 @@
 <x-guest-layout>
+    {{-- tērpa vienības pievienošanas lapa --}}
     <div class="mb-6 text-center">
         <h2 class="text-2xl font-semibold text-brand-accent dark:text-brand-light">Assign Costume Item</h2>
         <p class="mt-2 text-sm text-gray-600 dark:text-gray-300">Select a student name to assign this scanned item.</p>

@@ -17,7 +17,8 @@ class CostumeController extends Controller
 
         return view('admin.costumes.index', compact('costumes'));
     }
-
+    
+    // forma jauna tērpa pievienošanai
     public function create()
     {
         return view('admin.costumes.create');
@@ -31,7 +32,7 @@ class CostumeController extends Controller
             'image' => 'required|image|max:2048', // max 2MB
         ]);
 
-        // store the image
+        // saglabā bildi
         $imagePath = $request->file('image')->store('costumes', 'public');
 
         $costume = Costume::create([
@@ -41,11 +42,11 @@ class CostumeController extends Controller
             'group_id' => auth()->user()->adminGroups()->first()->id,
         ]);
 
-        // create CostumeItems
+        // izveido atsevišķas tērpa vienības
         for ($i = 0; $i < $request->quantity; $i++) {
             $costume->items()->create([
-                'qr_code' => Str::uuid(), // unique code for each item
-                'assigned_to' => null,    // initially not assigned
+                'qr_code' => Str::uuid(), // unikāls qr kods priekš katras vienības
+                'assigned_to' => null,    
             ]);
         }
 

@@ -1,4 +1,5 @@
 <x-app-layout>
+    {{-- pievieno jaunu studentu --}}
     <x-slot name="header">
         <div class="flex flex-col gap-1">
             <h2 class="text-2xl font-semibold text-brand-accent dark:text-brand-light leading-tight">Create New Member</h2>

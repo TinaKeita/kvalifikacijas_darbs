@@ -1,4 +1,5 @@
 <x-app-layout>
+    {{-- studentu sākumlapa --}}
     <x-slot name="header">
         <div class="flex flex-col gap-1">
             <h2 class="text-2xl font-semibold text-brand-accent dark:text-brand-light leading-tight">
