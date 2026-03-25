@@ -29,16 +29,12 @@ class CostumeController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'quantity' => 'required|integer|min:1',
-            'image' => 'required|image|max:2048', // max 2MB
         ]);
-
-        // saglabā bildi
-        $imagePath = $request->file('image')->store('costumes', 'public');
 
         $costume = Costume::create([
             'name' => $request->name,
             'quantity' => $request->quantity,
-            'image' => $imagePath,
+            'image' => null,
             'group_id' => auth()->user()->adminGroups()->first()->id,
         ]);
 

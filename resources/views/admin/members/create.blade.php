@@ -7,18 +7,36 @@
         </div>
     </x-slot>
 
+    {{-- success message --}}
+    @if (session('success'))
+        <div class="max-w-2xl mb-4 rounded-lg border border-green-300 bg-green-50 px-4 py-3 text-sm text-green-800 dark:border-green-700 dark:bg-green-900/30 dark:text-green-300">
+            {{ session('success') }}
+        </div>
+    @endif
+
     <div class="max-w-2xl rounded-xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
+        {{-- validation errors --}}
+        @if ($errors->any())
+            <div class="mb-5 rounded-lg border border-red-300 bg-red-50 px-4 py-3 text-sm text-red-800 dark:border-red-700 dark:bg-red-900/30 dark:text-red-300">
+                <ul class="list-disc list-inside space-y-1">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <form method="POST" action="{{ route('admin.members.store') }}" class="space-y-5">
             @csrf
 
             <div>
                 <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Name</label>
-                <input id="name" type="text" name="name" class="mt-1.5 w-full rounded-lg border-gray-300 px-3 py-2.5 text-gray-800 shadow-sm focus:border-brand-primary focus:ring-brand-secondary/50 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-200" required>
+                <input id="name" type="text" name="name" value="{{ old('name') }}" class="mt-1.5 w-full rounded-lg border-gray-300 px-3 py-2.5 text-gray-800 shadow-sm focus:border-brand-primary focus:ring-brand-secondary/50 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-200 @error('name') border-red-500 @enderror" required>
             </div>
 
             <div>
                 <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Email</label>
-                <input id="email" type="email" name="email" class="mt-1.5 w-full rounded-lg border-gray-300 px-3 py-2.5 text-gray-800 shadow-sm focus:border-brand-primary focus:ring-brand-secondary/50 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-200" required>
+                <input id="email" type="email" name="email" value="{{ old('email') }}" class="mt-1.5 w-full rounded-lg border-gray-300 px-3 py-2.5 text-gray-800 shadow-sm focus:border-brand-primary focus:ring-brand-secondary/50 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-200 @error('email') border-red-500 @enderror" required>
             </div>
 
             <button type="submit" class="inline-flex items-center rounded-lg border border-brand-primary/20 bg-brand-primary px-4 py-2 text-sm font-semibold text-white transition hover:bg-brand-accent focus:outline-none focus:ring-2 focus:ring-brand-secondary/50">

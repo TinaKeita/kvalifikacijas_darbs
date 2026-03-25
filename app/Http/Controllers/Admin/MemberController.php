@@ -22,7 +22,9 @@ class MemberController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'email' => 'required|email|unique:users,email|max:255'  
+            'email' => 'required|email|unique:users,email|max:255'
+        ], [
+            'email.unique' => 'A user with this email address is already in the database.',
         ]);
 
         $tempPassword = Str::random(12);

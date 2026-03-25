@@ -8,7 +8,7 @@
     </x-slot>
 
     <div class="max-w-2xl rounded-xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
-        <form method="POST" action="{{ route('admin.costumes.store') }}" enctype="multipart/form-data" class="space-y-5">
+        <form method="POST" action="{{ route('admin.costumes.store') }}" class="space-y-5">
             @csrf
 
             <div>
@@ -19,11 +19,6 @@
             <div>
                 <label for="quantity" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Quantity</label>
                 <input type="number" name="quantity" id="quantity" class="mt-1.5 w-full rounded-lg border-gray-300 px-3 py-2.5 text-gray-800 shadow-sm focus:border-brand-primary focus:ring-brand-secondary/50 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-200" required min="1" autocomplete="off">
-            </div>
-
-            <div>
-                <label for="image" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Image</label>
-                <input type="file" name="image" id="image" class="mt-1.5 w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-700 shadow-sm file:mr-4 file:rounded-md file:border-0 file:bg-brand-light/50 file:px-3 file:py-2 file:text-sm file:font-semibold file:text-brand-accent hover:file:bg-brand-light/70 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-200" accept="image/*" required autocomplete="off">
             </div>
 
             <button class="inline-flex items-center rounded-lg border border-brand-primary/20 bg-brand-primary px-4 py-2 text-sm font-semibold text-white transition hover:bg-brand-accent focus:outline-none focus:ring-2 focus:ring-brand-secondary/50">
