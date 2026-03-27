@@ -7,6 +7,15 @@
         </div>
     </x-slot>
 
+    <div class="mb-4">
+        <a href="{{ route('admin.costumes.index') }}" class="inline-flex items-center gap-1.5 text-sm font-medium text-brand-secondary dark:text-brand-light hover:text-brand-accent dark:hover:text-white transition">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+            </svg>
+            Back to Costumes
+        </a>
+    </div>
+
     <div class="mb-6">
         <form action="{{ route('admin.costumes.destroy', $costume->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this costume?');">
             @csrf
@@ -24,9 +33,17 @@
                     <p class="text-sm font-semibold text-gray-800 dark:text-gray-100">Item #{{ $item->id }}</p>
 
                     @if($item->assigned_to)
-                        <span class="rounded-full border border-amber-300 bg-amber-50 px-2.5 py-1 text-xs font-semibold text-amber-700 dark:border-amber-500/40 dark:bg-amber-900/20 dark:text-amber-300">
-                            Assigned to {{ $item->user->name }}
-                        </span>
+                        <div class="flex items-center gap-2">
+                            <span class="rounded-full border border-amber-300 bg-amber-50 px-2.5 py-1 text-xs font-semibold text-amber-700 dark:border-amber-500/40 dark:bg-amber-900/20 dark:text-amber-300">
+                                Assigned to {{ $item->user->name }}
+                            </span>
+                            <form method="POST" action="{{ route('admin.costumes.items.unassign', $item) }}">
+                                @csrf
+                                <button type="submit" class="inline-flex items-center rounded-lg border border-red-300 bg-red-50 px-2.5 py-1 text-xs font-semibold text-red-700 transition hover:bg-red-100 dark:border-red-500/40 dark:bg-red-900/20 dark:text-red-300 dark:hover:bg-red-900/40">
+                                    Unassign
+                                </button>
+                            </form>
+                        </div>
                     @else
                         <span class="rounded-full border border-emerald-300 bg-emerald-50 px-2.5 py-1 text-xs font-semibold text-emerald-700 dark:border-emerald-500/40 dark:bg-emerald-900/20 dark:text-emerald-300">
                             Available

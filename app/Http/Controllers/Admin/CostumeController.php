@@ -62,4 +62,14 @@ class CostumeController extends Controller
 
         return redirect()->route('admin.costumes.index')->with('success', 'Costume deleted.');
     }
+
+    public function unassign(CostumeItem $item)
+    {
+        $item->update([
+            'assigned_to' => null,
+            'assigned_at' => null,
+        ]);
+
+        return back()->with('success', 'Item unassigned successfully.');
+    }
 }

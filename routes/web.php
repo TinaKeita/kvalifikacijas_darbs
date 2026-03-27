@@ -51,6 +51,7 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', function () { return view('admin.dashboard'); })->name('dashboard');
     Route::resource('costumes', App\Http\Controllers\Admin\CostumeController::class);
+    Route::post('/costumes/items/{item}/unassign', [App\Http\Controllers\Admin\CostumeController::class, 'unassign'])->name('costumes.items.unassign');
     
     // members
     Route::get('/members/create', [App\Http\Controllers\Admin\MemberController::class, 'create'])->name('members.create');
